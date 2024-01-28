@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Slider</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-container {
+    position: relative;
+    width: 80%;
+    max-width: 600px;
+    margin: auto;
+}
+
+.slider {
+    display: flex;
+    overflow: hidden;
+}
+
+img {
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.prev-btn,
+.next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: #3498db;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.prev-btn {
+    left: 0;
+}
+
+.next-btn {
+    right: 0;
+}
+
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <ul class="slider">
+            <img src="/Img/slider1.webp" alt="Image 1">
+            <img src="/Img/slider3.jpg" alt="Image 2">
+            <img src="/Img/slider2.webp" alt="Image 3">
+            <img src="/Img/slider3.jpg" alt="Image 2">
+            <img src="/Img/slider2.webp" alt="Image 4">
+            <!-- Add more images as needed -->
+        </ul>
+        <button class="prev-btn" onclick="prevSlide()">Previous</button>
+        <button class="next-btn" onclick="nextSlide()">Next</button>
+    </div>
+
+    <script>
+        let currentIndex = 0;
+const slides = document.querySelectorAll('.slider img');
+
+function showSlide(index) {
+    if (index < 0) {
+        currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+        currentIndex = 0;
+    } else {
+        currentIndex = index + 1;
+    }
+
+    slides.forEach((slide, i) => {
+        console.log(`translateX(${100 * (i - currentIndex)}%)`)
+        slide.style.transform = `translateX(${100 * (i - currentIndex)}%)`;
+    });
+}
+
+function nextSlide() {
+    showSlide(currentIndex + 1);
+}
+
+function prevSlide() {
+    showSlide(currentIndex - 1);
+}
+
+// Optionally, you can add automatic slide change
+setInterval(nextSlide, 5000); // Change slide every 3 seconds
+
+    </script>
+</body>
+</html>
